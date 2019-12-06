@@ -1488,7 +1488,8 @@ function! <SID>IsBufferIgnored(buf)
   endif
 
   " Skip non normal buffers.
-  if getbufvar(a:buf, "&buftype") != ''
+  let l:buftype = getbufvar(a:buf, "&buftype")
+  if (l:buftype != '' && l:buftype != 'terminal') || getcmdwintype() != ""
     call <SID>DEBUG('Buffer '.a:buf.' is not normal, ignoring...',5)
     call <SID>DEBUG('Leaving IsBufferIgnored()',10)
     return 1
